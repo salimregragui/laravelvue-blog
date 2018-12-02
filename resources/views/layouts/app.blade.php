@@ -73,7 +73,24 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+
+            <div class="container">
+                <div class="row">
+                    <!--  Menu -->
+                    <div class="col-lg-4">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <a href="/posts/create">Create new post</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--  End Menu -->
+                    <div class="col-lg-8">
+                        @yield('content')
+                    </div>
+                </div>
+            </div>
+
         </main>
     </div>
 </body>
