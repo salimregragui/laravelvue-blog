@@ -26,7 +26,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 |
 */
 
-Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
+Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
+
+	Route::get('posts/{Post}/kill','PostsController@kill')->name('posts.kill');
+
+	Route::get('/posts/trashed','PostsController@trashed')->name('posts.trashed');
 
 	Route::resource('posts','PostsController');
 

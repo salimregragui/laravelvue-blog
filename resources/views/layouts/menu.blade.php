@@ -10,7 +10,11 @@
         </li>
 
         <li class="list-group-item">
-            <a href="{{ route('posts.create') }}">Create new post</a>
+            <a href="{{ route('posts.index') }}">Posts</a>
+        </li>
+
+        <li class="list-group-item">
+            <a href="{{ route('posts.trashed') }}">Trash</a>
         </li>
     </ul>
 </div>

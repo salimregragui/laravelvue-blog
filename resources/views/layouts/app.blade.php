@@ -82,14 +82,24 @@
             <div class="container">
                 <div class="row">
                     
-                    @auth {{-- if the user is connected show menu --}}
-                        
-                        @include('layouts.menu')
-                        @include('layouts.notifications')
+                    @auth {{-- if the user is an admin show menu --}}
 
-                        <div class="col-lg-8">
-                            @yield('content')
-                        </div>
+                        @if(auth()->user()->isAdmin())
+                        
+                            @include('layouts.menu')
+                            @include('layouts.notifications')
+
+                            <div class="col-lg-8">
+                                @yield('content')
+                            </div>
+
+                        @else
+
+                            <div class="col-lg-12">
+                                @yield('content')
+                            </div>
+
+                        @endif
 
                     @else
 
