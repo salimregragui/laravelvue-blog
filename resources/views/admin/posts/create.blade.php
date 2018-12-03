@@ -8,7 +8,7 @@
 
 		<div class="card-body">
 			
-			<form action="{{ route('posts.store') }}" method="POST">
+			<form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
 				
 				@csrf
 
@@ -47,6 +47,16 @@
 				</div>
 
 			</form>
+
+			<div>
+				
+				@foreach($errors->all() as $error)
+
+					<li>{{ $error}}</li>
+
+				@endforeach
+
+			</div>
 
 		</div>
 
