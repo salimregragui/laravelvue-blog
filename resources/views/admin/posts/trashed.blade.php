@@ -11,54 +11,57 @@
 		style="border-radius:0px;">Create a new blog post</a>
 
 		<div class="card-body">
+
+			@if(count($posts))
 			
-			<table class="table">
-			  <thead>
-			    <tr>
-			      <th scope="col">Image</th>
-			      <th scope="col">Title</th>
-			      <th scope="col">Edit</th>
-			      <th scope="col">Restore</th>
-			      <th scope="col">Delete</th>
-			    </tr>
-			  </thead>
-			  <tbody>
-			   	
-				@foreach($posts as $post)
+				<table class="table">
+				  <thead>
+				    <tr>
+				      <th scope="col">Image</th>
+				      <th scope="col">Title</th>
+				      <th scope="col">Edit</th>
+				      <th scope="col">Restore</th>
+				      <th scope="col">Delete</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				   	
+					@foreach($posts as $post)
 
-					<tr>
-				      <th scope="row">
-				      	<img src="{{ $post->featured }}" alt=" {{ $post->title }}" 
-				      	width="70px" height="70px">
-				      </th>
-				      <td>{{ $post->title }}</td>
-				      <td>
-				      	<a href="{{ route('posts.edit', $post) }}" class="btn btn-sm btn-success">Edit</a>
-				      </td>
-				      <td>
+						<tr>
+					      <th scope="row">
+					      	<img src="{{ $post->featured }}" alt=" {{ $post->title }}" 
+					      	width="70px" height="70px">
+					      </th>
+					      <td>{{ $post->title }}</td>
+					      <td>
+					      	<a href="{{ route('posts.edit', $post) }}" class="btn btn-sm btn-success">Edit</a>
+					      </td>
+					      <td>
 
-						<form action="{{ route('posts.destroy',$post) }}" method="POST">
-							
-							@csrf
-							@method('DELETE')
+							<a href="{{ route('posts.restore',$post) }}" class="btn btn-sm btn-info">Restore</a>
 
-							<button class="btn btn-sm btn-info">Restore</button>
+					      </td>
 
-						</form>
+					      <td>
 
-				      </td>
+							<a href="{{ route('posts.kill',$post) }}" class="btn btn-sm btn-danger">Delete</a>
 
-				      <td>
+					      </td>
+				    	</tr>
 
-						<a href="{{ route('posts.kill',$post) }}" class="btn btn-sm btn-danger">Delete</a>
+					@endforeach
 
-				      </td>
-			    	</tr>
+				  </tbody>
+				</table>
 
-				@endforeach
+			@else
 
-			  </tbody>
-			</table>
+				<div class="alert alert-info" role="alert">
+  					You have no trashed posts :)
+				</div>
+
+			@endif
 			
 		</div>
 

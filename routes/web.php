@@ -30,6 +30,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
 
 	Route::get('posts/{Post}/kill','PostsController@kill')->name('posts.kill');
 
+	Route::get('posts/{Post}/restore','PostsController@restore')->name('posts.restore');
+
 	Route::get('/posts/trashed','PostsController@trashed')->name('posts.trashed');
 
 	Route::resource('posts','PostsController');

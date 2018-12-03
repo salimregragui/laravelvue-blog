@@ -11,6 +11,8 @@
 		style="border-radius:0px;">Create a new category</a>
 
 		<div class="card-body">
+
+			@if(count($categories))
 			
 			<table class="table">
 			  <thead>
@@ -50,6 +52,14 @@
 			  </tbody>
 			</table>
 			
+			@else
+
+				<div class="alert alert-info" role="alert">
+  					You have no categories :(
+				</div>
+
+			@endif
+
 		</div>
 
 	</div>

@@ -96,9 +96,9 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        return view('admin.posts.edit',compact('post'))->with('categories',Category::All());
     }
 
     /**
@@ -108,9 +108,40 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
-        //
+        $validator = request()->validate([
+
+            'title' => 'required|min:3',
+            'content' => 'required|min:5',
+            'category_id' => 'required'
+
+        ]);
+
+        /****
+        * File upload on server if there is a new image
+        ****/
+
+        if(request()->hasFile('featured')){
+
+            $featured = request()->featured;
+            $featured_new_name = time().$featured->getClientOriginalName();
+            $featured->move('uploads/posts', $featured_new_name);
+            $featured_new_name = "uploads/posts/" . $featured_new_name;
+            $post->featured = $featured_new_name;
+
+        }
+
+        $post->update([
+            'title' => request()->title,
+            'content' => request()->content,
+            'category_id' => request()->category_id,
+            'slug' => str_slug(request()->title,'-')
+        ]);
+
+        Session::flash('success','Post edited successfully');
+
+        return redirect('/admin/posts');
     }
 
     /**
@@ -138,11 +169,32 @@ class PostsController extends Controller
     {
         $post = Post::withTrashed()->where('id',$id)->first();
 
-        $post->forceDelete();
+        if(!is_null($post)){
 
-        Session::flash('success','Post deleted successfully !');
+            $post->forceDelete();
+            Session::flash('success','Post deleted successfully !');
 
-        return redirect('/admin/posts/trashed');
+        }else{
+            abort('404'); //if there is no post with that id
+        }
+
+        return redirect('admin/posts/trashed');
+    }
+
+    public function restore($id)
+    {
+        $post = Post::withTrashed()->where('id',$id)->first();
+
+        if(!is_null($post)){
+
+            $post->restore();
+            Session::flash('success','Post successfully restored !');
+
+        }else{
+            abort('404'); //if there is no post with that id
+        }
+
+        return redirect('admin/posts/trashed');
     }
 
     /**

@@ -11,6 +11,8 @@
 		style="border-radius:0px;">Create a new blog post</a>
 
 		<div class="card-body">
+
+			@if(count($posts))
 			
 			<table class="table">
 			  <thead>
@@ -53,6 +55,14 @@
 			  </tbody>
 			</table>
 			
+			@else
+
+				<div class="alert alert-info" role="alert">
+  					You have no posts :(
+				</div>
+
+			@endif
+
 		</div>
 
 	</div>
