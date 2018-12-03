@@ -80,8 +80,8 @@
             @endif
 
             <div class="content">
-                <div class="title m-b-md">
-                    Laravel
+                <div class="title m-b-md" style="font-size:50px;">
+                    BLOG BY SALIM REGRAGUI
                 </div>
 
                 <div class="links">
