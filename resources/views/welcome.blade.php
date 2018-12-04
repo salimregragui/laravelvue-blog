@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>{{ config('app.name') }}</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
@@ -18,6 +18,13 @@
                 font-weight: 200;
                 height: 100vh;
                 margin: 0;
+            }
+
+            span{
+        
+                font-weight:100;
+                font-size:40px;
+
             }
 
             .full-height {
@@ -81,7 +88,8 @@
 
             <div class="content">
                 <div class="title m-b-md" style="font-size:50px;">
-                    BLOG BY SALIM REGRAGUI
+                    {{ strtoupper(config('app.name')) }} <br>
+                    <span>A Salim Regragui blog</span>
                 </div>
 
                 <div class="links">
